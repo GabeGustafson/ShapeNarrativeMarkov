@@ -76,6 +76,9 @@ var linesMiserable;
 var linesRepublic;
 var linesFrankenstein;
 
+// variable for storing all lines of the markov-narrative
+var narrative = "";
+
 function submit()
 {
   commandString = commandInput.value();
@@ -92,11 +95,11 @@ function submit()
     }
     else if(accuracy <= 70 && accuracy > 50)
     {
-      fuel -= int(accuracy *  (3.5 / 100));
+      fuel -= int(accuracy *  (2.7 / 100));
     }
     else if(accuracy <= 50 && accuracy >= 0)
     {
-      fuel -= int(accuracy *  (1.4 / 100));
+      fuel -= int(accuracy *  (1.1 / 100));
     }
 
     turnInfo += takeEnemyTurn();
@@ -369,7 +372,8 @@ function displayBattle()
 function populateEnemies()
 {
   let randStrength;
-  let rangeStrength = [level * 3, level * 4];
+  let rangeStrength = [level, level / 2 + 1
+  ];
 
   for(let i = 0; i < 1 + int(level / 2); i++)
   {
@@ -458,7 +462,7 @@ function displayEsotericTextInput()
 
     text(genTextA, fontSize2, canvasY * (5 / 100) + fontSize2 * 3, canvasX / 3 + fontSize2, canvasY * (5 / 100) + fontSize2 * 3 + canvasY * (5 / 100));
 
-    textAlign(RIGHT);
+    textAlign(LEFT);
 
     text(genTextB, canvasX * (2 / 3) - fontSize2 * 4, canvasY * (5 / 100) + fontSize2 * 3, canvasX - fontSize2 * 5.5, canvasY * (5 / 100) + fontSize2 * 3 + canvasY * (5 / 100));
   }
@@ -607,6 +611,16 @@ function setStats()
     }
   }
 
+  // set inventory maximum
+
+  for(let i = 0; i < inventory.length; i++)
+  {
+    if(inventory[i] == BACKPACK)
+    {
+      inventoryMax += 3;
+    }
+  }
+
   // generate accuracy
   accuracy = map(colorVal, 0, 255, 0, 100);
 
@@ -649,7 +663,7 @@ function useItem(targetInd)
 
   if(inventory[targetInd] == POTION)
   {
-    let healthRegain = (50 < (100 - health))? 50: (100 - health);
+    let healthRegain = (70 < (100 - health))? 70: (100 - health);
 
     health += healthRegain;
 
@@ -665,6 +679,7 @@ function useItem(targetInd)
 
     inventory.splice(targetInd, 1);
   }
+  /*
   else if(inventory[targetInd] == BACKPACK)
   {
     inventoryMax += 2;
@@ -673,6 +688,7 @@ function useItem(targetInd)
 
     inventory.splice(targetInd, 1);
   }
+  */
 
   return info;
 }
@@ -680,9 +696,15 @@ function useItem(targetInd)
 
 function dropItem(targetInd)
 {
-  info = "You dropped a " + inventory[targetInd] + ".\n";
+  if(inventory[targetInd] != BACKPACK)
+  {
+    info = "You dropped a " + inventory[targetInd] + ".\n";
 
-  inventory.splice(targetInd, 1);
+    inventory.splice(targetInd, 1);
+  }
+  else {
+    info = "";
+  }
 
   return info;
 }
@@ -760,6 +782,9 @@ function setup()
   markovSelectSubmit.mousePressed(createEsotericTextByText);
 
   markovSelectSubmit.hide();
+
+  // load final image
+  finalBackground = loadImage('darkwanderer.jpg');
 
   pause = false;
 }
@@ -847,18 +872,17 @@ function draw()
   {
     // pause game, erase prompt text
     pauseGame();
-    background(0);
+    background(finalBackground);
 
     // set font
-    let fontSize = canvasY / 14;
-    fill(255, 0, 0);
+    let fontSize = canvasY / 35;
+    fill(255, 255, 255);
     textSize(fontSize);
 
     // center text
     textAlign(CENTER);
-
     // display victory text
-    text("You Won...", canvasX / 2, canvasY / 2);
+    text(narrative, canvasX / 2, canvasY / 2);
   }
   else // sanity check
   {
@@ -896,6 +920,8 @@ function createEsotericTextByWord()
   let generatedText = markovWord.generate();
 
   generatedText = generatedText.replace(/(\r\n|\n|\r)/gm," ");
+
+  narrative += generatedText + " ";
 
   // show markov string
   text(generatedText, 0 + fontSize * 3, canvasY * (32/100) + fontSize * 3, canvasX - fontSize * 3, canvasY * (49 / 100));
@@ -972,6 +998,8 @@ function createEsotericTextByText()
   generatedText = generatedText.replace(/(\r\n|\n|\r)/gm," ");
 
   // display that text
+  narrative += generatedText + " ";
+
   text(generatedText, 0 + fontSize * 3, canvasY * (32/100) + fontSize * 3, canvasX - fontSize * 3, canvasY * (49 / 100));
 
   // ensure that the user has entered in some text before proceeding to the next level
