@@ -612,6 +612,7 @@ function setStats()
   }
 
   // set inventory maximum
+  inventoryMax = 4;
 
   for(let i = 0; i < inventory.length; i++)
   {
