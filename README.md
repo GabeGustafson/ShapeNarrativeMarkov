@@ -11,4 +11,4 @@ Rules:
 Note: All text files that the markov chains are based off of were obtained from the Gutenberg Project.
 Additionally, the markov texts themselves were generated with programs written by Daniel Shiffman.
 
-![screenshot1.png](screenshot1)
+![screenshot1](screenshot1.png)
