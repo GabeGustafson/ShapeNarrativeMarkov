@@ -876,14 +876,14 @@ function draw()
     background(finalBackground);
 
     // set font
-    let fontSize = canvasY / 35;
+    let fontSize = canvasY / 49;
     fill(255, 255, 255);
     textSize(fontSize);
 
     // center text
     textAlign(CENTER);
     // display victory text
-    text(narrative, canvasX / 2, canvasY / 2);
+    text(narrative, fontSize, fontSize, canvasX, canvasY);
   }
   else // sanity check
   {
