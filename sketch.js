@@ -690,13 +690,13 @@ function dropItem(targetInd)
 
 function preload()
 {
-  linesMetamorphosis = loadStrings("texts/metamorphosis.txt");
-  linesDick = loadStrings("texts/dick.txt");
-  linesIon = loadStrings("texts/ion.txt");
-  linesGeats = loadStrings("texts/geats.txt");
-  linesMiserable = loadStrings("texts/miserable.txt");
-  linesRepublic = loadStrings("texts/republic.txt");
-  linesFrankenstein = loadStrings("texts/frankenstein.txt");
+  linesMetamorphosis = loadStrings("metamorphosis.txt");
+  linesDick = loadStrings("dick.txt");
+  linesIon = loadStrings("ion.txt");
+  linesGeats = loadStrings("geats.txt");
+  linesMiserable = loadStrings("miserable.txt");
+  linesRepublic = loadStrings("republic.txt");
+  linesFrankenstein = loadStrings("frankenstein.txt");
 }
 
 function setup()
