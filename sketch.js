@@ -91,15 +91,15 @@ function submit()
   {
     if(accuracy > 70)
     {
-      fuel -= int(accuracy *  (7 / 100));
+      fuel -= int(accuracy *  (7 / 100) + 1);
     }
     else if(accuracy <= 70 && accuracy > 50)
     {
-      fuel -= int(accuracy *  (2.7 / 100));
+      fuel -= int(accuracy *  (2.7 / 100) + 1);
     }
     else if(accuracy <= 50 && accuracy >= 0)
     {
-      fuel -= int(accuracy *  (1.1 / 100));
+      fuel -= int(accuracy *  (1.2 / 100) + 1);
     }
 
     turnInfo += takeEnemyTurn();
