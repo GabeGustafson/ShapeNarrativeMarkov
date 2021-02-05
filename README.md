@@ -9,6 +9,6 @@ Rules:
 1. Collect loot by selecting an item from the drop-down menu and pressing enter to continue to the next level.
 
 Note: All text files that the markov chains are based off of were obtained from the Gutenberg Project.
-Additionally, the markov texts themselves were generated with programs written by Daniel Shiffman.
+Additionally, the markov texts themselves are generated with programs written by Daniel Shiffman.
 
 ![screenshot1](screenshot1.png)
